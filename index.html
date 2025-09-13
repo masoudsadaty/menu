@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منوی کبابی</title>
+    <title>منوی کباب شاهی</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Amiri', serif; /* فونت دست‌نویس فارسی */
-            background-color: #2c2c2c; /* پس‌زمینه تخته سیاه */
+            font-family: 'Amiri', serif;
+            background-color: #2c2c2c;
             color: #fff;
         }
 
@@ -26,7 +26,7 @@
         h1 {
             text-align: center;
             font-size: 3em;
-            color: #f5d300; /* طلایی */
+            color: #f5d300;
             margin-bottom: 25px;
             text-shadow: 2px 2px #000;
         }
@@ -39,6 +39,7 @@
             font-size: 1.6em;
             border-bottom: 1px dashed #555;
             transition: background 0.3s;
+            direction: rtl; /* متن فارسی راست‌چین */
         }
 
         .menu-item:hover {
@@ -46,25 +47,25 @@
         }
 
         .item-name {
-            text-align: left;
+            text-align: right;
+            flex: 1; /* اجازه می‌دهد نام به اندازه مناسب گسترش یابد */
+            padding-right: 10px;
         }
 
         .item-price {
-            text-align: right;
             color: #f5d300;
             min-width: 60px;
+            text-align: left; /* قیمت سمت چپ نمایش داده شود */
         }
 
         /* موبایل-فرندلی */
         @media (max-width: 600px) {
             .menu-item {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row; /* همیشه کنار هم */
                 font-size: 1.3em;
             }
-            .item-price {
-                margin-top: 5px;
-                text-align: left;
+            .item-name {
+                padding-right: 5px;
             }
         }
     </style>
