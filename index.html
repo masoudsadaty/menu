@@ -7,7 +7,6 @@
 
   <meta name="description" content="منوی دیجیتال کبابی — تخته سیاه، سریع و سبک" />
   <style>
-    /* ===== Tiny chalkboard-style single-file CSS ===== */
     :root{
       --bg:#0f1312;
       --chalk:#f6f6f2;
@@ -16,20 +15,29 @@
       --item-bg: rgba(255,255,255,0.01);
       --max-width:980px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
     body{
+      min-height:100vh;
       margin:0;
       font-family: "Tahoma", "Verdana", "Arial", system-ui, -apple-system;
       background: linear-gradient(180deg,#0b0d0b 0%, #121615 100%);
       display:flex;
-      align-items:center;
+      align-items:flex-start; /* شروع از بالا در همه‌ی موبایل‌ها */
       justify-content:center;
-      padding:20px;
+      padding:16px;
       color:var(--chalk);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.2;
+      line-height:1.3;
+    }
+
+    /* در صفحه‌های بلند (مثل مانیتور یا تلویزیون) وسط‌چین عمودی شود */
+    @media (min-height:720px){
+      body{
+        align-items:center;
+      }
     }
 
     .container{
@@ -38,15 +46,15 @@
       background:
         radial-gradient(800px 240px at 10% 10%, rgba(255,255,255,0.02), transparent 8%),
         linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
-      padding:26px;
+      padding:20px;
       border-radius:8px;
       box-shadow: 0 14px 36px rgba(0,0,0,0.6);
-      border:10px solid var(--frame);
+      border:8px solid var(--frame);
       position:relative;
       overflow:hidden;
     }
 
-    /* subtle chalk texture */
+    /* بافت گچی */
     .container::before{
       content:"";
       position:absolute;
@@ -60,59 +68,61 @@
 
     header{
       text-align:center;
-      margin-bottom:16px;
+      margin-bottom:10px;
     }
     header h1{
       margin:0;
-      font-size:34px;
-      letter-spacing:2px;
+      font-size:28px;
+      letter-spacing:1px;
       color:var(--chalk);
       font-weight:800;
       text-shadow: 0 0 1px rgba(255,255,255,0.04);
     }
     header p.sub{
-      margin:6px 0 0;
+      margin:4px 0 0;
       color:var(--accent);
-      font-size:13px;
+      font-size:12px;
     }
 
-    /* controls */
+    /* کنترل‌ها */
     .controls{
       position:absolute;
-      left:18px;
-      top:18px;
+      left:12px;
+      top:12px;
       display:flex;
-      gap:8px;
+      gap:6px;
       align-items:center;
+      z-index:2;
     }
     .controls button{
       appearance:none;
       border:1px solid rgba(255,255,255,0.06);
-      background:transparent;
+      background:rgba(0,0,0,0.25);
       color:var(--chalk);
-      padding:6px 10px;
+      padding:5px 9px;
       border-radius:6px;
-      font-size:13px;
+      font-size:11px;
       cursor:pointer;
+      white-space:nowrap;
     }
     .controls button:active{transform:translateY(1px)}
 
-    /* items grid */
+    /* آیتم‌ها */
     .items{
       display:grid;
       grid-template-columns: 1fr;
-      gap:8px 18px;
+      gap:6px 14px;
       margin-top:6px;
     }
     .item{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:12px 14px;
+      padding:10px 12px;
       border-radius:8px;
       background:var(--item-bg);
       box-shadow: inset 0 -1px 0 rgba(255,255,255,0.02);
-      font-size:20px;
+      font-size:18px;
       font-weight:700;
       color:var(--chalk);
       text-shadow: 0 1px 0 rgba(0,0,0,0.6);
@@ -126,22 +136,53 @@
     @media (min-width:1100px){
       header h1{font-size:42px}
       .item{font-size:22px}
+      .container{padding:26px;border-width:10px;}
+    }
+
+    /* موبایل‌های خیلی کوچک */
+    @media (max-width:480px){
+      .container{
+        padding:14px;
+        border-width:6px;
+      }
+      header{
+        margin-bottom:6px;
+      }
+      header h1{
+        font-size:22px;
+      }
+      header p.sub{
+        font-size:11px;
+      }
+      .item{
+        font-size:17px;
+        padding:9px 10px;
+      }
     }
 
     footer{
-      margin-top:14px;
+      margin-top:10px;
       text-align:center;
       color:var(--accent);
-      font-size:13px;
+      font-size:11px;
     }
 
-    /* large-screen / TV friendly */
+    /* حالت نمایش بزرگ برای تلویزیون */
     .tv-mode header h1{font-size:48px}
     .tv-mode .item{font-size:34px;padding:18px 20px}
     .tv-mode .controls{display:none}
 
-    /* small accessibility tweaks */
-    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .sr-only{
+      position:absolute!important;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0 0 0 0);
+      white-space:nowrap;
+      border:0;
+    }
   </style>
 </head>
 <body>
@@ -156,11 +197,6 @@
       <p class="sub">لطفاً انتخاب کنید — برای سفارش به کارکنان اطلاع دهید</p>
     </header>
 
-    <!--
-      برای تغییر منو: فقط بین <section class="items"> ... </section> آیتم‌ها را ویرایش کنید.
-      هر آیتم به شکل:
-      <div class="item"><span class="name">نام غذا</span><span class="price">۸۵ تومان</span></div>
-    -->
     <section class="items" aria-label="فهرست غذاها">
       <div class="item"><span class="name">جگر</span><span class="price">۹۹ تومان</span></div>
       <div class="item"><span class="name">جگر دنبه</span><span class="price">۹۹ تومان</span></div>
@@ -193,13 +229,11 @@
   </main>
 
   <script>
-    // Tiny JS: toggle TV-friendly (bigger) view and print
     (function(){
       const container = document.getElementById('menuContainer');
       const toggleBtn = document.getElementById('toggleSizeBtn');
       const printBtn = document.getElementById('printBtn');
 
-      // remember preference in sessionStorage
       function setTV(on){
         if(on){
           container.classList.add('tv-mode');
@@ -216,14 +250,14 @@
         setTV(!container.classList.contains('tv-mode'));
       });
 
-      // init from session
       if(sessionStorage.getItem('tvMode')) setTV(true);
 
       printBtn.addEventListener('click', function(){ window.print(); });
 
-      // Optional: keyboard shortcut T toggles TV mode (useful on PC)
       window.addEventListener('keydown', function(e){
-        if(e.key.toLowerCase() === 't') setTV(!container.classList.contains('tv-mode'));
+        if(e.key && e.key.toLowerCase() === 't'){
+          setTV(!container.classList.contains('tv-mode'));
+        }
       });
     })();
   </script>
